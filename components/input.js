@@ -3,7 +3,7 @@ import React, { fragment } from 'react'
 class Input extends React.Component {
   constructor(props) {
     super(props)
-    const {type, label, ...options} = props;
+    const {type, label, className, ...options} = props;
     this.options = options;
   }
 
@@ -27,13 +27,13 @@ class Input extends React.Component {
     const label = this.props.label
     const type = this.props.type
     return (
-      <fragment>
+      <div className={this.props.className}>
         { label ?
             <label title={this.options.hint} htmlFor={label}>{this.labelize()}</label>
             : null
         }
         {this.formType()}
-      </fragment>
+      </div>
     )
   }
 }
