@@ -1,6 +1,7 @@
 import React, { fragment } from 'react'
 import { graphql } from 'react-apollo'
 import gql from "graphql-tag"
+import Router from 'next/router';
 import { Mutation } from "react-apollo"
 import Input from '../components/input'
 import Form from '../components/form'
@@ -20,6 +21,18 @@ const ADD_CADET = gql`
     }
   }
 `;
+
+const Error = styled.p`
+  grid-column-start: 2;
+  color: #333;
+  background-color: lightcoral;
+  width: 100%;
+  border: 1px solid red;
+  border-radius: 4px;
+  padding: 13px 0;
+  text-align: center;
+  margin: 5px 0;
+`
 
 const Grid = styled.div`
 	display: grid;
@@ -117,39 +130,43 @@ const Button = styled(Input)`
 	}
 `
 
-const Apply = () => {
-  const data = {}
+class Apply extends React.Component {
+  state = {error: undefined}
 
-  return (
-		<Mutation mutation={ADD_CADET}>
-			{(addCadet, {error, data}) => (
-				<Grid>
-					<Header>Apply for the Spacedojo Cadet program</Header>
-					<Intro>The Spacedojo Cadet program is a 6 month paid on-the-job training program. Use the skills you have now and the ones you will learn during the six months to start building a career in development right now.</Intro>
-					<Form callback={(formData, ref) => {
-						addCadet({variables: { ...formData }})
-						.then((response) => {
-							ref.reset()
-							console.log(response.data, 'INCOMING TRANSMISSION')
-						})
-						.catch((err) => {
-							console.log(err, 'DANGER WILL')
-							console.log(error, 'DANGER WILL PT 2')
-						})
-					}}>
-						<StyledInput type="text" label="name" placeholder="Jill Smith" required />
-						<StyledInput type="email" label="email" placeholder="jill@smith.com" required />
-						<StyledInput type="textarea" label="languages" rows="4" placeholder="JS, Ruby, PHP" hint="Languages you've used to develop before" />
-						<StyledInput type="text" label="githubUrl" placeholder="https://github.com/queso" />
-						<StyledInput type="text" label="twitterUrl" />
-						<StyledInput type="text" label="linkedInUrl" />
-						<StyledInput type="text" label="location" placeholder="Portland, Oregon" hint="Your physical city and state" required />
-						<Button type="submit" value="Apply" />
-					</Form>
-				</Grid>
-			)}
-		</Mutation>
-  )
+  render() {
+    return (
+      <Mutation mutation={ADD_CADET}>
+        {(addCadet, {error, data}) => (
+          <Grid>
+            <Header>Apply for the Spacedojo Cadet program</Header>
+            <Intro>The Spacedojo Cadet program is a 6 month paid on-the-job training program. Use the skills you have now and the ones you will learn during the six months to start building a career in development right now.</Intro>
+            <Form callback={(formData, ref) => {
+              addCadet({variables: { ...formData }})
+              .then((response) => {
+                ref.reset()
+                Router.push({ pathname: '/apply-thanks' })
+              })
+              .catch((err) => {
+                this.setState({error: err.message})
+              })
+            }}>
+              <StyledInput type="text" label="name" placeholder="Jill Smith" required />
+              <StyledInput type="email" label="email" placeholder="jill@smith.com" required />
+              <StyledInput type="textarea" label="languages" rows="4" placeholder="JS, Ruby, PHP" hint="Languages you've used to develop before" />
+              <StyledInput type="text" label="githubUrl" placeholder="https://github.com/queso" />
+              <StyledInput type="text" label="twitterUrl" />
+              <StyledInput type="text" label="linkedInUrl" />
+              <StyledInput type="text" label="location" placeholder="Portland, Oregon" hint="Your physical city and state" required />
+              {this.state.error &&
+                <Error>{this.state.error}</Error>
+              }
+              <Button type="submit" value="Apply" />
+            </Form>
+          </Grid>
+        )}
+      </Mutation>
+    )
+  }
 }
 
 export default Apply
