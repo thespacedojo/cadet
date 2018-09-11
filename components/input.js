@@ -17,7 +17,7 @@ class Input extends React.Component {
     const options = this.options
     switch(this.props.type) {
       case 'textarea':
-        return <textarea id={this.props.label} {...options} />
+        return <textarea id={this.props.label} {...options}></textarea>
       default:
         return <input id={this.props.label} type={this.props.type} {...options} />
     }

@@ -118,9 +118,9 @@ const Apply = () => {
 							console.log(error, 'DANGER WILL PT 2')
 						})
 					}}>
-						<StyledInput type="text" label="name" required />
-						<StyledInput type="email" label="email" required />
-						<StyledInput type="textarea" label="languages" rows="4" placeholder="JS, Ruby, PHP" hint="Languages you've used to develop before" required />
+						<StyledInput type="text" label="name" placeholder="Jill Smith" required />
+						<StyledInput type="email" label="email" placeholder="jill@smith.com" required />
+						<StyledInput type="textarea" label="languages" rows="4" placeholder="JS, Ruby, PHP" hint="Languages you've used to develop before" />
 						<StyledInput type="text" label="githubUrl" placeholder="https://github.com/queso" />
 						<StyledInput type="text" label="twitterUrl" />
 						<StyledInput type="text" label="linkedInUrl" />
