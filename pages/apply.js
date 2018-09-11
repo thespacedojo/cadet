@@ -21,15 +21,27 @@ const ADD_CADET = gql`
   }
 `;
 
+const Grid = styled.div`
+	display: grid;
+	grid-template-columns: 1fr 1.5fr 1fr;
+
+  @media (max-width: 1000px) {
+		grid-template-columns: 0.25fr 1fr 0.25fr;
+  }
+
+	form {
+		grid-column-start: 2;
+	}
+`
+
 const Header = styled.h1`
 	text-align: left;
-	margin-left: 28.5%;
-	width: 37%;
+	grid-column-start: 2;
 `
+
 const Intro = styled.p`
+	grid-column-start: 2;
 	text-align: left;
-	width: 37%;
-	margin-left: 28.5%;
 	padding: 10px 0px;
 	line-height: 1.4em;
 	max-width: 75ch;
@@ -37,16 +49,15 @@ const Intro = styled.p`
 
 const StyledInput = styled(Input)`
 	display: grid;
-	grid-template-columns: 1fr 1.5fr 1fr;
+
 	margin-bottom: 1rem;
 
 	input, textarea {
 		padding: 6px 12px;
 		border-radius: 3px;
 		border: 1px solid white;
-		font-size: 1.1em;
+		font-size: 17px;
 		grid-row-start: 2;
-		grid-column-start: 2;
 
 		::placeholder {
 			color: #aaa;
@@ -56,10 +67,10 @@ const StyledInput = styled(Input)`
 	input:focus, textarea:focus {
 		border:1px solid #6b539c;
 		outline:none;
+		-webkit-text-size-adjust: 100%;
 	}
 
 	label {
-		grid-column-start: 2;
 		grid-row-start: 1;
 		text-align: left;
 		padding-right: 30px;
@@ -69,9 +80,6 @@ const StyledInput = styled(Input)`
 `
 
 const Button = styled(Input)`
-	display: grid;
-	grid-template-columns: 1fr 1.5fr 1fr;
-
 	input[type="submit"] {
 		grid-column-start: 2;
 		background-color: #6b539c;
@@ -89,6 +97,7 @@ const Button = styled(Input)`
     white-space: nowrap;
     vertical-align: middle;
     cursor: pointer;
+		-webkit-appearance: none;
     -webkit-user-select: none;
     -moz-user-select: none;
     -ms-user-select: none;
@@ -104,7 +113,7 @@ const Apply = () => {
   return (
 		<Mutation mutation={ADD_CADET}>
 			{(addCadet, {error, data}) => (
-				<fragment>
+				<Grid>
 					<Header>Apply for the Spacedojo Cadet program</Header>
 					<Intro>The Spacedojo Cadet program is a 6 month paid on-the-job training program. Use the skills you have now and the ones you will learn during the six months to start building a career in development right now.</Intro>
 					<Form callback={(formData, ref) => {
@@ -127,7 +136,7 @@ const Apply = () => {
 						<StyledInput type="text" label="location" placeholder="Portland, Oregon" hint="Your physical city and state" required />
 						<Button type="submit" value="Apply" />
 					</Form>
-				</fragment>
+				</Grid>
 			)}
 		</Mutation>
   )
