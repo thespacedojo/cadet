@@ -26,7 +26,7 @@ const Grid = styled.div`
 	grid-template-columns: 1fr 1.5fr 1fr;
 
   @media (max-width: 1000px) {
-		grid-template-columns: 0.25fr 1fr 0.25fr;
+		grid-template-columns: 0.2fr 1fr 0.2fr;
   }
 
 	form {
@@ -37,6 +37,10 @@ const Grid = styled.div`
 const Header = styled.h1`
 	text-align: left;
 	grid-column-start: 2;
+
+  @media (max-width: 1000px) {
+    font-size: 1.1em;
+  }
 `
 
 const Intro = styled.p`
@@ -45,6 +49,10 @@ const Intro = styled.p`
 	padding: 10px 0px;
 	line-height: 1.4em;
 	max-width: 75ch;
+
+  @media (max-width: 1000px) {
+    font-size: 0.9em;
+  }
 `
 
 const StyledInput = styled(Input)`
@@ -56,8 +64,9 @@ const StyledInput = styled(Input)`
 		padding: 6px 12px;
 		border-radius: 3px;
 		border: 1px solid white;
-		font-size: 17px;
+		font-size: 1.1em;
 		grid-row-start: 2;
+    -webkit-appearance: none;
 
 		::placeholder {
 			color: #aaa;
@@ -67,6 +76,7 @@ const StyledInput = styled(Input)`
 	input:focus, textarea:focus {
 		border:1px solid #6b539c;
 		outline:none;
+		font-size: 1.1em;
 		-webkit-text-size-adjust: 100%;
 	}
 
