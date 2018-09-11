@@ -22,17 +22,22 @@ const ADD_CADET = gql`
 `;
 
 const Header = styled.h1`
-	text-align: center;
+	text-align: left;
+	margin-left: 28.5%;
+	width: 37%;
 `
 const Intro = styled.p`
-	text-align: center;
-	width: 50%;
-	margin-left: 25%;
+	text-align: left;
+	width: 37%;
+	margin-left: 28.5%;
+	padding: 10px 0px;
+	line-height: 1.4em;
+	max-width: 75ch;
 `
 
 const StyledInput = styled(Input)`
 	display: grid;
-	grid-template-columns: 0.5fr 0.5fr 2fr 1fr;
+	grid-template-columns: 1fr 1.5fr 1fr;
 	margin-bottom: 1rem;
 
 	input, textarea {
@@ -40,6 +45,12 @@ const StyledInput = styled(Input)`
 		border-radius: 3px;
 		border: 1px solid white;
 		font-size: 1.1em;
+		grid-row-start: 2;
+		grid-column-start: 2;
+
+		::placeholder {
+			color: #aaa;
+		}
 	}
 
 	input:focus, textarea:focus {
@@ -49,18 +60,20 @@ const StyledInput = styled(Input)`
 
 	label {
 		grid-column-start: 2;
-		text-align: right;
+		grid-row-start: 1;
+		text-align: left;
 		padding-right: 30px;
 		padding-top: 6px;
+		margin-bottom: 7px;
 	}
 `
 
 const Button = styled(Input)`
 	display: grid;
-	grid-template-columns: 0.5fr 0.5fr 2fr 1fr;
+	grid-template-columns: 1fr 1.5fr 1fr;
 
 	input[type="submit"] {
-		grid-column-start: 3;
+		grid-column-start: 2;
 		background-color: #6b539c;
 		border: 1px solid #6b539c;
 		color: white;
@@ -69,7 +82,7 @@ const Button = styled(Input)`
 		width: 100%;
 		display: inline-block;
     padding: 6px 12px;
-    margin-bottom: 0;
+    margin: 1.6em 0 0 0;;
     font-size: 14px;
     line-height: 1.42857143;
     text-align: center;
@@ -107,11 +120,11 @@ const Apply = () => {
 					}}>
 						<StyledInput type="text" label="name" required />
 						<StyledInput type="email" label="email" required />
-						<StyledInput type="textarea" label="languages" rows="4" hint="Languages you've used to develop before" required />
-						<StyledInput type="text" label="githubUrl" />
+						<StyledInput type="textarea" label="languages" rows="4" placeholder="JS, Ruby, PHP" hint="Languages you've used to develop before" required />
+						<StyledInput type="text" label="githubUrl" placeholder="https://github.com/queso" />
 						<StyledInput type="text" label="twitterUrl" />
 						<StyledInput type="text" label="linkedInUrl" />
-						<StyledInput type="text" label="location" hint="Your physical city and state" required />
+						<StyledInput type="text" label="location" placeholder="Portland, Oregon" hint="Your physical city and state" required />
 						<Button type="submit" value="Apply" />
 					</Form>
 				</fragment>
