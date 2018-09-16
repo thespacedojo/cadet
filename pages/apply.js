@@ -144,6 +144,7 @@ class Apply extends React.Component {
               addCadet({variables: { ...formData }})
               .then((response) => {
                 ref.reset()
+                this.props.updateCadet(response.data.createCadet.id)
                 Router.push({ pathname: '/apply-thanks' })
               })
               .catch((err) => {
