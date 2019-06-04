@@ -15,27 +15,46 @@ class Input extends React.Component {
 
   formType = () => {
     const options = this.options
+    const ref = this.options.forwardedRef || React.createRef()
     switch(this.props.type) {
       case 'textarea':
         return <textarea id={this.props.label} {...options}></textarea>
+      case 'radio':
+        return <input type={this.props.type} id={`${options.name}-${this.props.label}`} value={this.props.label} {...options} />
       default:
-        return <input id={this.props.label} type={this.props.type} {...options} />
+        return <input id={this.props.label} ref={ref} type={this.props.type} {...options} />
     }
   }
 
+  beforeLabel = () => {
+    if (this.props.type !== 'radio')
+      return this.label()
+  }
+
+  afterLabel = () => {
+    if (this.props.type === 'radio')
+      return this.label()
+  }
+
+  label = () => {
+    return this.props.label ?
+      <label title={this.options.hint} htmlFor={this.props.label}>{this.labelize()}</label>
+      : null
+  }
+
   render() {
-    const label = this.props.label
-    const type = this.props.type
     return (
       <div className={this.props.className}>
-        { label ?
-            <label title={this.options.hint} htmlFor={label}>{this.labelize()}</label>
-            : null
-        }
+        {this.beforeLabel()}
         {this.formType()}
+        {this.afterLabel()}
       </div>
     )
   }
 }
 
-export default Input
+const ForwardedInput = React.forwardRef((props, ref) => (
+  <Input {...props} forwardedRef={ref} />
+))
+
+export default ForwardedInput

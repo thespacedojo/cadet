@@ -26,7 +26,7 @@ export default class MyDocument extends Document {
 					<link href="https://fonts.googleapis.com/css?family=Open+Sans:400,700|Roboto:400,700" />
 					{this.props.styleTags}
         </Head>
-        <body style={{ 'fontFamily': "'Roboto', sans-serif", 'background-color': '#eee', 'font-size': '16px', 'color': '#333' }}>
+        <body style={{ 'fontFamily': "'Roboto', sans-serif", 'backgroundColor': '#eee', 'fontSize': '16px', 'color': '#333' }}>
           <Main />
           <NextScript />
         </body>
